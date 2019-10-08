@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True"
+	xmlns:local="clr-namespace:XamarinApp.Views;assembly=XamarinApp"
+    xmlns:main="clr-namespace:XamarinApp"
+    x:Class="XamarinApp.Views.Home"
+    Title="Home">
+
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <main:GuidToString x:Key="GuidToString" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Padding="15,15,15,15" VerticalOptions="Fill">
+        <!-- Place new controls here -->
+        <Label 
+           Text="{Binding Identity}"
+           HorizontalOptions="Center"
+           
+/>
+        <Button Text="Sync Data" x:Name="SyncData"
+                Command="{Binding Sync}"
+                IsEnabled="{Binding __AllowSync}"
+                StyleClass="Primary"
+                
+                />
+        <Button Text="Add New Customer" x:Name="AddCustomer"
+                 Command="{Binding AddCustomer}"
+                IsEnabled="{Binding __AllowAddCustomer}"
+                StyleClass="Primary"
+                
+                />
+
+        <Button Text="Reload Collection" x:Name="ReloadCollection"
+                 Command="{Binding RefreashCollection}"
+                IsEnabled="{Binding __AllowRefreashCollection}"
+                StyleClass="Primary"
+                
+                />
+        <Label 
+           Text="{Binding TotalRecords}"
+           HorizontalOptions="Center"
+           
+/>
+        <ListView x:Name="ListView" RowHeight="100" ItemsSource="{Binding Customers}" VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding Oid, Converter={StaticResource GuidToString}}"  Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                            <Label Text="{Binding Code}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                            <Label Text="{Binding Name}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+
+</ContentPage>
+

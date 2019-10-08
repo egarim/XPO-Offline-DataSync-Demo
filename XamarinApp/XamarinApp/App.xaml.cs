@@ -2,6 +2,8 @@
 using Prism.Ioc;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinApp.Views;
+using XamarinApp.ViewModels;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace XamarinApp
@@ -20,12 +22,17 @@ namespace XamarinApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
+            await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<Home, HomeViewModel>();
+            containerRegistry.RegisterForNavigation<CustomerListView, CustomerListViewViewModel>();
+            containerRegistry.RegisterForNavigation<TransactionLogListView, TransactionLogListViewViewModel>();
+            containerRegistry.RegisterForNavigation<CustomerDetailView, CustomerDetailViewViewModel>();
         }
     }
 }

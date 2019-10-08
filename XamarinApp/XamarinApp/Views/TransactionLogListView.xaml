@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True"
+	xmlns:local="clr-namespace:XamarinApp.Views;assembly=XamarinApp"
+    x:Class="XamarinApp.Views.TransactionLogListView"
+    Title="Transaction Log List">
+
+
+
+	  <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+          <Label Text="TransactionLogListView" VerticalOptions="Center" HorizontalOptions="Center" />
+			  </StackLayout>
+    
+
+</ContentPage>
+
