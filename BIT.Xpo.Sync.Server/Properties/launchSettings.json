@@ -1,0 +1,34 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": true,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/BIT.Xpo.Sync.ServerNew",
+      "sslPort": 0
+    },
+    "iisExpress": {
+      "applicationUrl": "http://localhost:61037",
+      "sslPort": 44333
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "launchUrl": "api/Test",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "BIT.Xpo.Sync.Server": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "api/values",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+    }
+  }
+}
