@@ -29,7 +29,7 @@ namespace XamarinApp
         public App() : this(null) { }
 
         public static string Identity = string.Format("{0} {1} {2}", DeviceInfo.Model, DeviceInfo.Version, DeviceInfo.Name);
-        public static SyncDataStore Ds;
+        public static SyncDataStore DataStore;
         public App(IPlatformInitializer initializer) : base(initializer) { }
 
         protected override async void OnInitialized()
@@ -42,8 +42,8 @@ namespace XamarinApp
 
 
 
-            //Ds = new TrackerProxy(Identity, true, "http://192.168.0.53:62614/", ClientType.Slave);
-            Ds = new SyncDataStore(Identity, false, "http://aadcb62e.ngrok.io/BIT.XpoSyncFramework.Server/");
+         
+            DataStore = new SyncDataStore(Identity, false, "http://192.168.1.64/BIT.Xpo.Sync.ServerNew/api/Sync");
 
             try
             {
@@ -52,18 +52,19 @@ namespace XamarinApp
                 var CacheShared = ";Cache=Shared;";
                 var MainDb = Path.Combine(MainPath, "MainDb.db");
                 Debug.WriteLine(string.Format("{0}:{1}", "MainDb", MainDb));
-                var Tracker = Path.Combine(MainPath, "Tracker.db");
-                Debug.WriteLine(string.Format("{0}:{1}", "Tracker", Tracker));
+                var Log = Path.Combine(MainPath, "Log.db");
+                Debug.WriteLine(string.Format("{0}:{1}", "Log", Log));
 
-                //Ds.InitTrackerDal((SQLiteConnectionProvider.GetConnectionString(Tracker) + CacheShared), true);
+              
 
-                Ds.Initialize(
+                DataStore.Initialize(
 
                     SQLiteConnectionProvider.GetConnectionString(MainDb) + CacheShared,
-                    SQLiteConnectionProvider.GetConnectionString(Tracker) + CacheShared, true, AutoCreateOption.DatabaseAndSchema, new Assembly[] { typeof(Demo.ORM.CustomBaseObject).Assembly });
-                XpoDefault.DataLayer = new SimpleDataLayer(Ds);
+                    SQLiteConnectionProvider.GetConnectionString(Log) + CacheShared, true, AutoCreateOption.DatabaseAndSchema, new Assembly[] { typeof(Demo.ORM.CustomBaseObject).Assembly });
+                XpoDefault.DataLayer = new SimpleDataLayer(DataStore);
 
 
+                DataStore.PullModification();
 
                 UnitOfWork UoW = new UnitOfWork();
                 CreateInitialData(UoW);
@@ -91,9 +92,9 @@ namespace XamarinApp
             if (e.NetworkAccess == NetworkAccess.Internet)
             {
                 Debug.WriteLine(string.Format("{0}:{1}", "App", "Connected to the internet"));
-                App.Ds.PullModificationsFromApi();
+                App.DataStore.PullModificationsFromApi();
 
-                App.Ds.PushModificationsToApi();
+                App.DataStore.PushModificationsToApi();
             }
         }
 
@@ -103,11 +104,11 @@ namespace XamarinApp
             if (count == 0)
             {
                 List<Customer> Customers = new List<Customer>();
-                for (int i = 1; i < 100; i++)
+                for (int i = 1; i <= 10; i++)
                 {
 
                     Customer Customer = new Demo.ORM.Customer(UoW);
-                    Customer.Code = $"{DeviceInfo.Model} {i.ToString()}";
+                    Customer.Code = $"Customer-{i.ToString()}-{DeviceInfo.Model}";
                     Customer.Name = "Customer " + i.ToString();
                     Customers.Add(Customer);
                 }

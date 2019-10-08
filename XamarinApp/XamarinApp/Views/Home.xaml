@@ -39,7 +39,7 @@
 
         <Button Text="Reload Collection" x:Name="ReloadCollection"
                  Command="{Binding RefreashCollection}"
-                IsEnabled="{Binding __AllowRefreashCollection}"
+                IsEnabled="{Binding __AllowRefreshCollection}"
                 StyleClass="Primary"
                 
                 />
@@ -53,9 +53,9 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
-                            <Label Text="{Binding Oid, Converter={StaticResource GuidToString}}"  Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
-                            <Label Text="{Binding Code}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
-                            <Label Text="{Binding Name}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"/>
+                            <Label Text="{Binding Oid, Converter={StaticResource GuidToString},StringFormat='Oid:{0}'}"  Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                            <Label Text="{Binding Code,StringFormat='Code:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                            <Label Text="{Binding Name,StringFormat='Name:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

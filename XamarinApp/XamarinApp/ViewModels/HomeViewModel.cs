@@ -43,6 +43,7 @@ namespace XamarinApp.ViewModels
                     return;
                 totalRecords = value;
                 OnPropertyChanged(this, new PropertyChangedEventArgs(nameof(TotalRecords)));
+                RaisePropertyChanged(nameof(TotalRecords));
             }
         }
 
@@ -85,7 +86,8 @@ namespace XamarinApp.ViewModels
                 }
 
                 customers = value;
-                OnPropertyChanged(this, new PropertyChangedEventArgs(nameof(Customers)));
+                RaisePropertyChanged(nameof(Customers));
+            
             }
         }
         string identity;
@@ -108,7 +110,7 @@ namespace XamarinApp.ViewModels
             {
                 this.__AllowAddCustomer = false;
                 ((Command)this.AddCustomer).ChangeCanExecute();
-                Debug.WriteLine("AddCustomer excuted");
+                Debug.WriteLine("AddCustomer executed");
 
                 Customer TestCustomer = new Customer(uoW);
                 string CodeAndName = DateTime.Now.ToString("yyyyMMddhhmmssfff");
@@ -153,17 +155,15 @@ namespace XamarinApp.ViewModels
             {
                 this.__AllowSync = false;
                 ((Command)this.Sync).ChangeCanExecute();
-                Debug.WriteLine("Sync excuted");
+                Debug.WriteLine("Sync executed");
                 try
                 {
 
-                    //App.Ds.PullModificationsFromApi("http://192.168.0.53:62614/");
+                    
 
-                    //App.Ds.PushModificationsToApi("http://192.168.0.53:62614/");
+                    App.DataStore.PullModificationsFromApi();
 
-                    App.Ds.PullModificationsFromApi();
-
-                    App.Ds.PushModificationsToApi();
+                    App.DataStore.PushModificationsToApi();
                     uoW.ReloadChangedObjects();
                     this.Customers = new XpoObservableCollection<Customer>(this.uoW);
                     UpdateCount();
@@ -192,9 +192,9 @@ namespace XamarinApp.ViewModels
         #endregion "Sync 
 
         #region 'RefreashCollection Command'
-        public ICommand RefreashCollection { protected set; get; }
+        public ICommand RefreshCollection { protected set; get; }
         private bool _AllowRefreashCollection;
-        public bool __AllowRefreashCollection
+        public bool __AllowRefreshCollection
         {
             get { return _AllowRefreashCollection; }
             set
@@ -202,29 +202,30 @@ namespace XamarinApp.ViewModels
                 if (_AllowRefreashCollection == value)
                     return;
                 _AllowRefreashCollection = value;
-                OnPropertyChanged(this, new PropertyChangedEventArgs("AllowRefreashCollection"));
+                RaisePropertyChanged(nameof(__AllowRefreshCollection));
             }
         }
         private void SetupRefreashCollectionCommand()
         {
-            this.__AllowRefreashCollection = true;
+            this.__AllowRefreshCollection = true;
             Action<object> CommandExecuteAction = (nothing) =>
             {
-                this.__AllowRefreashCollection = false;
-                ((Command)this.RefreashCollection).ChangeCanExecute();
-                Debug.WriteLine("RefreashCollection excuted");
+                this.__AllowRefreshCollection = false;
+                ((Command)this.RefreshCollection).ChangeCanExecute();
+                Debug.WriteLine("RefreshCollection executed");
                 uoW.ReloadChangedObjects();
                 this.Customers = new XpoObservableCollection<Customer>(this.uoW);
                 UpdateCount();
-                this.__AllowRefreashCollection = true;
-                ((Command)this.RefreashCollection).ChangeCanExecute();
+
+                this.__AllowRefreshCollection = true;
+                ((Command)this.RefreshCollection).ChangeCanExecute();
             };
             Func<object, bool> CommandEvaluation = (nothing) =>
             {
-                return this.__AllowRefreashCollection;
+                return this.__AllowRefreshCollection;
             };
 
-            this.RefreashCollection = new Command(CommandExecuteAction, CommandEvaluation);
+            this.RefreshCollection = new Command(CommandExecuteAction, CommandEvaluation);
         }
         #endregion "RefreashCollection 
     }

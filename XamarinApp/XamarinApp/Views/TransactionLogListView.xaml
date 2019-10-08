@@ -5,15 +5,56 @@
     xmlns:prism="http://prismlibrary.com"
     prism:ViewModelLocator.AutowireViewModel="True"
 	xmlns:local="clr-namespace:XamarinApp.Views;assembly=XamarinApp"
+    xmlns:main="clr-namespace:XamarinApp"
     x:Class="XamarinApp.Views.TransactionLogListView"
     Title="Transaction Log List">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <main:ByteArrayToKb x:Key="ByteArrayToKb" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
+    <StackLayout Padding="15,15,15,15" VerticalOptions="Fill">
+        <!-- Place new controls here -->
+        <Label 
+           Text="{Binding Identity}"
+           HorizontalOptions="Center"
+           
+/>
+        <Button Text="Refresh" x:Name="Refresh"
+                Command="{Binding Sync}"
+                IsEnabled="{Binding __AllowSync}"
+                StyleClass="Primary"
+                
+                />
+        <Button Text="Purge Everything" x:Name="AddCustomer"
+                 Command="{Binding AddCustomer}"
+                IsEnabled="{Binding __AllowAddCustomer}"
+                StyleClass="Primary"
+                
+                />
+        <Label 
+           Text="{Binding TotalRecords}"
+           HorizontalOptions="Center"
+           
+/>
+        <ListView x:Name="ListView" RowHeight="70" ItemsSource="{Binding Trackers}" VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding Oid,StringFormat='Oid:{0}'}"  Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                            <Label Text="{Binding Date,StringFormat='Date:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                            <Label Text="{Binding Operation,Converter={StaticResource ByteArrayToKb},StringFormat='Size:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                            <!--<Label Text="{Binding Name}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"/>-->
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 
-	  <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-          <Label Text="TransactionLogListView" VerticalOptions="Center" HorizontalOptions="Center" />
-			  </StackLayout>
-    
 
 </ContentPage>
 
