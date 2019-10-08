@@ -26,6 +26,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleDemo", "ConsoleDemo\ConsoleDemo.csproj", "{CB68E5D3-36A3-4AB9-9CC9-2B396DB1FF6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xamarin", "Xamarin", "{1310BD3B-7E89-4313-A0BC-2D747B77D5CB}"
+	ProjectSection(SolutionItems) = preProject
+		TodoXamarin.txt = TodoXamarin.txt
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XamarinApp", "XamarinApp\XamarinApp\XamarinApp.csproj", "{34A05C83-D712-482B-A495-6AF5D1F54DE4}"
 EndProject

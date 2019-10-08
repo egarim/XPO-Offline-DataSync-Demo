@@ -1,0 +1,2 @@
+1) format the dates on the list view
+2) refactor to use beter names in the view model
