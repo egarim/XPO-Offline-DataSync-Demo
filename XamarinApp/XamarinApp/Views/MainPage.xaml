@@ -11,12 +11,9 @@
 
 
 
-	<local:Home />
-	  
-	<local:CustomerListView />
-	  
-	<local:TransactionLogListView />
-	  
+    <local:Home />
+    <local:TransactionLogListView />
+	<local:TransactionHistoryListView />
 
 </TabbedPage>
 

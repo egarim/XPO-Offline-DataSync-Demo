@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="XamarinApp.Views.TransactionHistoryListView" Title="Transaction History">
+    <ContentPage.Content>
+        <StackLayout Padding="15,15,15,15" VerticalOptions="Fill">
+            <!-- Place new controls here -->
+            <Button Text="Refresh" x:Name="SyncData"
+                Command="{Binding Sync}"
+                IsEnabled="{Binding __AllowSync}"
+                StyleClass="Primary"
+                />
+            <ListView x:Name="ListView" RowHeight="70" ItemsSource="{Binding TransactionHistory}" VerticalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Oid,StringFormat='Oid:{0}'}"  Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                                <Label Text="{Binding Date,StringFormat='Date:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                                <Label Text="{Binding Message,StringFormat='Message:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                                <Label Text="{Binding OwnerClass,StringFormat='OwnerClass:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                                <Label Text="{Binding Method,StringFormat='Method:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                                <!--<Label Text="{Binding Name}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"/>-->
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
