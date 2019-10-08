@@ -13,14 +13,14 @@
                 IsEnabled="{Binding __AllowSync}"
                 StyleClass="Primary"
                 />
-            <ListView x:Name="ListView" RowHeight="70" ItemsSource="{Binding TransactionHistory}" VerticalOptions="FillAndExpand">
+            <ListView x:Name="ListView" RowHeight="70" ItemsSource="{Binding TransactionHistory}" VerticalOptions="FillAndExpand" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout>
                                 <Label Text="{Binding Oid,StringFormat='Oid:{0}'}"  Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
                                 <Label Text="{Binding Date,StringFormat='Date:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
-                                <Label Text="{Binding Message,StringFormat='Message:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                                <Label Text="{Binding Message,StringFormat='Message:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="WordWrap"></Label>
                                 <Label Text="{Binding OwnerClass,StringFormat='OwnerClass:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
                                 <Label Text="{Binding Method,StringFormat='Method:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
                                 <!--<Label Text="{Binding Name}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"/>-->

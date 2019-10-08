@@ -3,6 +3,7 @@ using BIT.Xpo.OfflineDataSync;
 using DevExpress.Xpo;
 using Prism.Navigation;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -23,7 +24,7 @@ namespace XamarinApp.ViewModels
                 if (_AllowSync == value)
                     return;
                 _AllowSync = value;
-                OnPropertyChanged(this, new PropertyChangedEventArgs("AllowSync"));
+                RaisePropertyChanged(nameof(__AllowSync));
             }
         }
         private void SetupSyncCommand()
@@ -64,6 +65,7 @@ namespace XamarinApp.ViewModels
         public TransactionHistoryListViewViewModel(INavigationService navigationService) : base(navigationService)
         {
             this.TransactionHistory = new XpoObservableCollection<TransactionHistory>(uoW);
+            SetupSyncCommand();
 
         }
         UnitOfWork uoW = new UnitOfWork(App.DataStore.TransactionLogDataLayer);

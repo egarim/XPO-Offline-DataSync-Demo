@@ -27,7 +27,7 @@ namespace OfflineDataSyncDemo.Module.DatabaseUpdate {
 
         private void CreateCustomer(string name, string Code)
         {
-            Customer theObject = ObjectSpace.FindObject<Customer>(CriteriaOperator.Parse("Name=?", name));
+            Customer theObject = ObjectSpace.FindObject<Customer>(CriteriaOperator.Parse("Code=?", Code));
             if (theObject == null)
             {
                 theObject = ObjectSpace.CreateObject<Customer>();
