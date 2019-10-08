@@ -41,7 +41,7 @@ namespace BIT.Xpo.Sync.Server
             var LocalConnectionString = @"XpoProvider=MSSqlServer;Data Source=DESKTOP-M1AQUP1\SQLEXPRESS;User ID=sa;Password=JoseManuel16;Initial Catalog=XafSyncDemo;Persist Security Info=true";
             SyncDataStore syncDataStore = new SyncDataStore("Master");
             syncDataStore.Initialize(LocalConnectionString, LogConnectionString, true, DevExpress.Xpo.DB.AutoCreateOption.DatabaseAndSchema, new Assembly[] { typeof(Customer).Assembly });
-
+            SyncDataStore.EnableTransactionHistory = true;
             services.AddSyncDataStore(syncDataStore);
 
 

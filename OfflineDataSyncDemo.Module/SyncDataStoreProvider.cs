@@ -16,6 +16,7 @@ namespace OfflineDataSyncDemo.Module
         Assembly[] _Assemblies;
         public SyncDataStoreProvider(params Assembly[] Assemblies)
         {
+            SyncDataStore.EnableTransactionHistory = true;
             _Assemblies = Assemblies;
             DataStore = new SyncDataStore("XAF");
         }

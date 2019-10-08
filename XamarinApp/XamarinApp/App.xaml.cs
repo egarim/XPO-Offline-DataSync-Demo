@@ -63,7 +63,7 @@ namespace XamarinApp
                     SQLiteConnectionProvider.GetConnectionString(Log) + CacheShared, true, AutoCreateOption.DatabaseAndSchema, new Assembly[] { typeof(Demo.ORM.CustomBaseObject).Assembly });
                 XpoDefault.DataLayer = new SimpleDataLayer(DataStore);
 
-
+                SyncDataStore.EnableTransactionHistory = true;
                 DataStore.PullModification();
 
                 UnitOfWork UoW = new UnitOfWork();
