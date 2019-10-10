@@ -161,7 +161,7 @@ namespace XamarinApp.ViewModels
 
                     
 
-                    App.DataStore.PullModificationsFromApi();
+                    var counter= App.DataStore.PullModificationsFromApi();
 
                     App.DataStore.PushModificationsToApi();
                     uoW.ReloadChangedObjects();
