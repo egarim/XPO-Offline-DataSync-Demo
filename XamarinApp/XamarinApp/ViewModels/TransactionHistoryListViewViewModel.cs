@@ -38,7 +38,7 @@ namespace XamarinApp.ViewModels
                 try
                 {
 
-                    this.TransactionHistory = new XpoObservableCollection<TransactionHistory>(uoW);
+                    this.TransactionHistory = new XpoObservableCollection<SynLog>(uoW);
 
                 }
                 catch (Exception exception)
@@ -64,13 +64,13 @@ namespace XamarinApp.ViewModels
         }
         public TransactionHistoryListViewViewModel(INavigationService navigationService) : base(navigationService)
         {
-            this.TransactionHistory = new XpoObservableCollection<TransactionHistory>(uoW);
+            this.TransactionHistory = new XpoObservableCollection<SynLog>(uoW);
             SetupSyncCommand();
 
         }
         UnitOfWork uoW = new UnitOfWork(App.DataStore.TransactionLogDataLayer);
-        XpoObservableCollection<TransactionHistory> transactionHistory;
-        public XpoObservableCollection<TransactionHistory> TransactionHistory
+        XpoObservableCollection<SynLog> transactionHistory;
+        public XpoObservableCollection<SynLog> TransactionHistory
         {
             get => transactionHistory; set
             {

@@ -121,7 +121,7 @@ namespace XamarinApp
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<Home, HomeViewModel>();
-            containerRegistry.RegisterForNavigation<CustomerListView, CustomerListViewViewModel>();
+          
             containerRegistry.RegisterForNavigation<TransactionLogListView, TransactionLogListViewViewModel>();
             containerRegistry.RegisterForNavigation<CustomerDetailView, CustomerDetailViewViewModel>();
             containerRegistry.RegisterForNavigation<TransactionHistoryListView, TransactionHistoryListViewViewModel>();
