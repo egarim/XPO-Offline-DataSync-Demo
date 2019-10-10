@@ -39,13 +39,13 @@
            HorizontalOptions="Center"
            
 />
-        <ListView x:Name="ListView" RowHeight="70" ItemsSource="{Binding Trackers}" VerticalOptions="FillAndExpand">
+        <ListView x:Name="ListView" RowHeight="70" ItemsSource="{Binding TransactionLogs}" VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
                             <Label Text="{Binding Oid,StringFormat='Oid:{0}'}"  Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
-                            <Label Text="{Binding Date,StringFormat='Date:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
+                            <Label Text="{Binding Date, StringFormat='Date-\{0:MM/dd/yy}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
                             <Label Text="{Binding Operation,Converter={StaticResource ByteArrayToKb},StringFormat='Size:{0}'}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"></Label>
                             <!--<Label Text="{Binding Name}" Font="Small"  TextColor="Gray" LineBreakMode="TailTruncation"/>-->
                         </StackLayout>

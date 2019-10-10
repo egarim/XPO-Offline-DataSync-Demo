@@ -30,6 +30,7 @@ namespace XamarinApp.ViewModels
             SetupAddCustomerCommand();
             SetupSyncCommand();
             SetupRefreashCollectionCommand();
+            SetupItemTappedCommand();
             this.Identity = App.Identity;
         }
         //xcbu
@@ -228,5 +229,49 @@ namespace XamarinApp.ViewModels
             this.RefreshCollection = new Command(CommandExecuteAction, CommandEvaluation);
         }
         #endregion "RefreashCollection 
+        #region 'ItemTapped Command'
+        public ICommand ItemTapped { protected set; get; }
+        private bool _AllowItemTapped;
+        public bool __AllowItemTapped
+        {
+            get { return _AllowItemTapped; }
+            set
+            {
+                if (_AllowItemTapped == value)
+                    return;
+                _AllowItemTapped = value;
+                RaisePropertyChanged(nameof(__AllowItemTapped));
+            }
+        }
+        private void SetupItemTappedCommand()
+        {
+            this.__AllowItemTapped = true;
+            Action<object> CommandExecuteAction = (Paramater) =>
+            {
+
+                this.__AllowItemTapped = false;
+                ((Command)this.ItemTapped).ChangeCanExecute();
+                Debug.WriteLine("ItemTapped executed");
+
+                Customer customer = (Customer)Paramater;
+                var navParameters = new NavigationParameters();
+                navParameters.Add("Oid", customer.Oid);
+                this.NavigationService.NavigateAsync("CustomerDetailView", navParameters);
+
+
+                this.__AllowItemTapped = true;
+                ((Command)this.RefreshCollection).ChangeCanExecute();
+            };
+            Func<object, bool> CommandEvaluation = (nothing) =>
+            {
+                return this.__AllowItemTapped;
+            };
+
+            this.ItemTapped = new Command(CommandExecuteAction, CommandEvaluation);
+        }
+        #endregion "RefreashCollection 
+
+
+
     }
 }

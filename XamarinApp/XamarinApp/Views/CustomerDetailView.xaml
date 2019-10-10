@@ -8,12 +8,20 @@
     x:Class="XamarinApp.Views.CustomerDetailView"
     Title="Customer Detail">
 
+    <StackLayout Orientation="Vertical" >
 
+        <Label Text="Customer" />
+        <StackLayout Orientation="Vertical" >
 
-	  <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-          <Label Text="CustomerDetailView" VerticalOptions="Center" HorizontalOptions="Center" />
-			  </StackLayout>
-    
+            <Label Text="Code" />
+            <Entry Text="{Binding Path=Code, Mode=TwoWay}" Placeholder="Code" />
+            <Label Text="Name" />
+            <Entry Text="{Binding Path=Name, Mode=TwoWay}" Placeholder="Name" />
+        </StackLayout>
+    </StackLayout>
+
+   
+
 
 </ContentPage>
 

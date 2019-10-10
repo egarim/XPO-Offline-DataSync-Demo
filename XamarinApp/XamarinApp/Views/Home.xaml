@@ -10,10 +10,11 @@
     Title="Home">
 
 
-
+  
     <ContentPage.Resources>
         <ResourceDictionary>
             <main:GuidToString x:Key="GuidToString" />
+            <main:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -49,6 +50,11 @@
            
 />
         <ListView x:Name="ListView" RowHeight="100" ItemsSource="{Binding Customers}" VerticalOptions="FillAndExpand">
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemTapped" 
+                                      Command="{Binding ItemTapped}"
+                                      EventArgsConverter="{StaticResource itemTappedEventArgsConverter}" />
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

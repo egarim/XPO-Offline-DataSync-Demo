@@ -24,14 +24,25 @@ namespace XamarinApp.ViewModels
 
         public bool IsActive { get; set; }
 
-        public TransactionLogListViewViewModel(INavigationService navigationService) : base (navigationService)
+        public TransactionLogListViewViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Trackers = new XpoObservableCollection<TransactionLog>(uoW);
+            TransactionLogs = new XpoObservableCollection<TransactionLog>(uoW);
             UpdateCount();
             SetupAddCustomerCommand();
             SetupSyncCommand();
             this.Identity = App.Identity;
+            this.IsActiveChanged += TransactionLogListViewViewModel_IsActiveChanged;
         }
+
+        private void TransactionLogListViewViewModel_IsActiveChanged(object sender, EventArgs e)
+        {
+            if (this.IsActive)
+            {
+             
+                this.Sync.Execute(null);
+            }
+        }
+
         int totalRecords;
         public int TotalRecords
         {
@@ -47,14 +58,14 @@ namespace XamarinApp.ViewModels
 
         UnitOfWork uoW = new UnitOfWork(App.DataStore.TransactionLogDataLayer);
         private XpoObservableCollection<TransactionLog> trackers;
-        
+
 
         private void UpdateCount()
         {
-            this.TotalRecords = Trackers.Count;
+            this.TotalRecords = TransactionLogs.Count;
         }
 
-       
+
 
         #region 'AddCustomer Command'
         public ICommand AddCustomer { protected set; get; }
@@ -71,7 +82,7 @@ namespace XamarinApp.ViewModels
             }
         }
 
-        public XpoObservableCollection<TransactionLog> Trackers
+        public XpoObservableCollection<TransactionLog> TransactionLogs
         {
             get => trackers; set
             {
@@ -81,7 +92,7 @@ namespace XamarinApp.ViewModels
                 }
 
                 trackers = value;
-                RaisePropertyChanged(nameof(Trackers));
+                RaisePropertyChanged(nameof(TransactionLogs));
             }
         }
         string identity;
@@ -158,10 +169,7 @@ namespace XamarinApp.ViewModels
                 Debug.WriteLine("Sync executed");
                 try
                 {
-                    //App.Ds.PullModificationsFromApi("http://192.168.0.53:62614/");
-
-                    //App.Ds.PushModificationsToApi("http://192.168.0.53:62614/");
-                    this.Trackers = new XpoObservableCollection<TransactionLog>(this.uoW);
+                    this.TransactionLogs = new XpoObservableCollection<TransactionLog>(this.uoW);
                     UpdateCount();
                 }
                 catch (Exception exception)
@@ -186,5 +194,8 @@ namespace XamarinApp.ViewModels
             this.Sync = new Command(CommandExecuteAction, CommandEvaluation);
         }
         #endregion "Sync 
+
+
+
     }
 }
