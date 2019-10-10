@@ -14,9 +14,13 @@
         <StackLayout Orientation="Vertical" >
 
             <Label Text="Code" />
-            <Entry Text="{Binding Path=Code, Mode=TwoWay}" Placeholder="Code" />
+            <Entry Text="{Binding Path=Customer.Code, Mode=TwoWay}" Placeholder="Code" />
             <Label Text="Name" />
-            <Entry Text="{Binding Path=Name, Mode=TwoWay}" Placeholder="Name" />
+            <Entry Text="{Binding Path=Customer.Name, Mode=TwoWay}" Placeholder="Name" />
+            <Button Text="Save" x:Name="SaveButton"
+                Command="{Binding SaveCommand}"
+                IsEnabled="{Binding IsEnabled}"
+                StyleClass="Primary"/>
         </StackLayout>
     </StackLayout>
 

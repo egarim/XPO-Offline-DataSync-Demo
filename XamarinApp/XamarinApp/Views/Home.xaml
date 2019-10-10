@@ -39,7 +39,7 @@
                 />
 
         <Button Text="Reload Collection" x:Name="ReloadCollection"
-                 Command="{Binding RefreashCollection}"
+                 Command="{Binding RefreshCollection}"
                 IsEnabled="{Binding __AllowRefreshCollection}"
                 StyleClass="Primary"
                 

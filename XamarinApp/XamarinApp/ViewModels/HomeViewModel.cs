@@ -43,7 +43,7 @@ namespace XamarinApp.ViewModels
                 if (totalRecords == value)
                     return;
                 totalRecords = value;
-                OnPropertyChanged(this, new PropertyChangedEventArgs(nameof(TotalRecords)));
+            
                 RaisePropertyChanged(nameof(TotalRecords));
             }
         }
@@ -57,11 +57,8 @@ namespace XamarinApp.ViewModels
             this.TotalRecords = Customers.Count;
         }
 
-        protected virtual void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            PropertyChanged?.Invoke(sender, e);
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
+        
+        //public event PropertyChangedEventHandler PropertyChanged;
         #region 'AddCustomer Command'
         public ICommand AddCustomer { protected set; get; }
         private bool _AllowAddCustomer;
@@ -73,7 +70,7 @@ namespace XamarinApp.ViewModels
                 if (_AllowAddCustomer == value)
                     return;
                 _AllowAddCustomer = value;
-                OnPropertyChanged(this, new PropertyChangedEventArgs("AllowAddCustomer"));
+                this.RaisePropertyChanged(nameof(__AllowAddCustomer));
             }
         }
 
@@ -100,7 +97,7 @@ namespace XamarinApp.ViewModels
                 if (identity == value)
                     return;
                 identity = value;
-                OnPropertyChanged(this, new PropertyChangedEventArgs(nameof(Identity)));
+                this.RaisePropertyChanged(nameof(Identity));
             }
         }
 
@@ -146,7 +143,7 @@ namespace XamarinApp.ViewModels
                 if (_AllowSync == value)
                     return;
                 _AllowSync = value;
-                OnPropertyChanged(this, new PropertyChangedEventArgs("AllowSync"));
+                this.RaisePropertyChanged(nameof(__AllowSync));
             }
         }
         private void SetupSyncCommand()
@@ -255,7 +252,7 @@ namespace XamarinApp.ViewModels
 
                 Customer customer = (Customer)Paramater;
                 var navParameters = new NavigationParameters();
-                navParameters.Add("Oid", customer.Oid);
+                navParameters.Add("Oid", customer.Oid.ToString());
                 this.NavigationService.NavigateAsync("CustomerDetailView", navParameters);
 
 
