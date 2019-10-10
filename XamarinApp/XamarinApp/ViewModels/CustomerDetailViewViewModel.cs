@@ -3,6 +3,7 @@ using Demo.ORM;
 using DevExpress.Xpo;
 using Prism;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
 using XamarinApp.Infrastructure;
@@ -15,7 +16,7 @@ namespace XamarinApp.ViewModels
 
         Customer customer;
         UnitOfWork uoW;
-
+        private IEventAggregator _ea;
         public Customer Customer
         {
             get { return customer; }
@@ -28,8 +29,9 @@ namespace XamarinApp.ViewModels
             }
         }
         
-        public CustomerDetailViewViewModel(INavigationService navigationService) : base (navigationService)
+        public CustomerDetailViewViewModel(INavigationService navigationService, IEventAggregator ea) : base (navigationService)
         {
+            _ea = ea;
             uoW = new UnitOfWork();
             SaveCommand = new DelegateCommand(Save, CanSubmit).ObservesCanExecute(() => IsEnabled);
             this.IsEnabled = true;
@@ -39,8 +41,15 @@ namespace XamarinApp.ViewModels
         {
             if(this.uoW.InTransaction)
                 this.uoW.CommitChanges();
-        }
 
+            this.NavigationService.GoBackAsync();
+
+        }
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            base.OnNavigatedFrom(parameters);
+            _ea.GetEvent<CustomerSaved>().Publish(null);
+        }
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);

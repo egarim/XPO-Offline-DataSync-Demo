@@ -7,6 +7,7 @@ using Demo.ORM;
 using DevExpress.Xpo;
 using Prism;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -22,9 +23,10 @@ namespace XamarinApp.ViewModels
 #pragma warning restore 67
 
         public bool IsActive { get; set; }
-
-        public HomeViewModel(INavigationService navigationService) : base (navigationService)
+        private IEventAggregator _ea;
+        public HomeViewModel(INavigationService navigationService, IEventAggregator ea) : base (navigationService)
         {
+            _ea = ea;
             Customers = new XpoObservableCollection<Customer>(uoW);
             UpdateCount();
             SetupAddCustomerCommand();
@@ -227,8 +229,16 @@ namespace XamarinApp.ViewModels
         }
         #endregion "RefreashCollection 
         #region 'ItemTapped Command'
+
+        void CustomerSavedEvent(string Parameter)
+        {
+            this.RefreshCollection.Execute(null);
+            customerSaved.Unsubscribe(CustomerSavedEvent);
+        }
+
         public ICommand ItemTapped { protected set; get; }
         private bool _AllowItemTapped;
+        CustomerSaved customerSaved;
         public bool __AllowItemTapped
         {
             get { return _AllowItemTapped; }
@@ -253,7 +263,11 @@ namespace XamarinApp.ViewModels
                 Customer customer = (Customer)Paramater;
                 var navParameters = new NavigationParameters();
                 navParameters.Add("Oid", customer.Oid.ToString());
-                this.NavigationService.NavigateAsync("CustomerDetailView", navParameters);
+
+                customerSaved = _ea.GetEvent<CustomerSaved>();
+                customerSaved.Subscribe(CustomerSavedEvent, ThreadOption.UIThread);
+
+                this.NavigationService.NavigateAsync("CustomerDetailView", navParameters,true);
 
 
                 this.__AllowItemTapped = true;
