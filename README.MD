@@ -29,7 +29,10 @@ The create the correct scenario for a data synchronization we need to have sampl
 5.	Right click over the solution, go to properties and the select startup projects > multiple startup projects and in the action, column set the following projects to start
  
     a.	BIT.Xpo.Sync.Server
+    
     b.	OfflineDataSyncDemo.Win
+    
     c.	XamarinApp.Android
+    
 6. Now you can do the CRUD operations in the XAF app (OfflineDataSyncDemo.Win) and sync them with the XAMARIN app (XamarinApp.Android)
 7. Have fun 😊 adding or editing records on the Xamarin App
