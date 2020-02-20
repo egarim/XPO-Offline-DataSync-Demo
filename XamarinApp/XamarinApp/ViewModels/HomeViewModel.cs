@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
-using BIT.Xpo.Observable;
+using BIT.Xpo.Observables;
 using Demo.ORM;
 using DevExpress.Xpo;
 using Prism;

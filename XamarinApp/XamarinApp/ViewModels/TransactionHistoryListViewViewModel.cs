@@ -1,4 +1,4 @@
-using BIT.Xpo.Observable;
+using BIT.Xpo.Observables;
 using BIT.Xpo.OfflineDataSync;
 using DevExpress.Xpo;
 using Prism.Navigation;
