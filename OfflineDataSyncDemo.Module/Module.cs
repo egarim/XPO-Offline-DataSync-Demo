@@ -25,9 +25,7 @@ namespace OfflineDataSyncDemo.Module {
         public OfflineDataSyncDemoModule() {
             InitializeComponent();
 			BaseObject.OidInitializationMode = OidInitializationMode.AfterConstruction;
-            this.AdditionalExportedTypes.Add(typeof(Demo.ORM.Customer));
-            this.AdditionalExportedTypes.Add(typeof(Demo.ORM.CustomBaseObject));
-            this.AdditionalExportedTypes.Add(typeof(Demo.ORM.Invoice));
+          
         }
         public override IEnumerable<ModuleUpdater> GetModuleUpdaters(IObjectSpace objectSpace, Version versionFromDB) {
             ModuleUpdater updater = new DatabaseUpdate.Updater(objectSpace, versionFromDB);
@@ -42,10 +40,7 @@ namespace OfflineDataSyncDemo.Module {
         public override void CustomizeTypesInfo(ITypesInfo typesInfo) {
             base.CustomizeTypesInfo(typesInfo);
             CalculatedPersistentAliasHelper.CustomizeTypesInfo(typesInfo);
-            var CustomerTypeInfo = typesInfo.FindTypeInfo(typeof(Customer));
-            CustomerTypeInfo.AddAttribute(new DefaultClassOptionsAttribute());
-            var InvoiceTypeInfo = typesInfo.FindTypeInfo(typeof(Invoice));
-            InvoiceTypeInfo.AddAttribute(new DefaultClassOptionsAttribute());
+           
         }
         private static SyncDataStoreProvider provider;
         void application_CreateCustomObjectSpaceProvider(object sender, CreateCustomObjectSpaceProviderEventArgs e)
@@ -64,6 +59,7 @@ namespace OfflineDataSyncDemo.Module {
                     ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString,
                     ConfigurationManager.ConnectionStrings["LogConnectionString"].ConnectionString);
             }
+            ((ISyncDataStore)this.Application).SyncDataStore = provider.DataStore;
         }
     }
 }

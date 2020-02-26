@@ -3,6 +3,7 @@ using DevExpress.ExpressApp.Xpo;
 using DevExpress.Xpo.Metadata;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,13 +13,13 @@ namespace OfflineDataSyncDemo.Module
 {
     public class SyncDataStoreProvider : IXpoDataStoreProvider
     {
-        private SyncDataStore DataStore;
+        private SyncDataStore _DataStore;
         Assembly[] _Assemblies;
         public SyncDataStoreProvider(params Assembly[] Assemblies)
         {
             SyncDataStore.EnableTransactionHistory=true;
             _Assemblies = Assemblies;
-            DataStore = new SyncDataStore("XAF");
+            DataStore = new SyncDataStore(ConfigurationManager.AppSettings["Main"]);
         }
         public DevExpress.Xpo.DB.IDataStore CreateUpdatingStore(bool allowUpdateSchema, out IDisposable[] disposableObjects)
         {
@@ -48,6 +49,8 @@ namespace OfflineDataSyncDemo.Module
             get;
             private set;
         }
+        public SyncDataStore DataStore { get => _DataStore; set => _DataStore = value; }
+
         public void Initialize(XPDictionary dictionary, string LocalDatabase, string LogDatabase)
         {
 

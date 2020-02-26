@@ -83,6 +83,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\CustomBaseObject.cs" />
+    <Compile Include="BusinessObjects\Customer.cs" />
+    <Compile Include="BusinessObjects\Invoice.cs" />
+    <Compile Include="BusinessObjects\Product.cs" />
+    <Compile Include="Controllers\SyncController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\SyncController.Designer.cs">
+      <DependentUpon>SyncController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ISyncDataStore.cs" />
     <Compile Include="SyncDataStoreProvider.cs" />
     <Compile Include="DatabaseUpdate\Updater.cs" />
     <Compile Include="Module.cs">
@@ -94,7 +105,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controllers\SyncController.resx">
+      <DependentUpon>SyncController.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BusinessObjects\ReadMe.txt" />
@@ -115,12 +130,6 @@
     <PackageReference Include="BIT.Xpo.OfflineDataSync">
       <Version>19.2.6.1</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Demo.ORM\Demo.ORM.csproj">
-      <Project>{3c92b4c3-d8ef-495e-af74-3a4eb7f505a6}</Project>
-      <Name>Demo.ORM</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,10 +6,14 @@ using System.Collections.Generic;
 using DevExpress.ExpressApp.Updating;
 using DevExpress.ExpressApp.Win.Utils;
 using DevExpress.ExpressApp.Xpo;
+using OfflineDataSyncDemo.Module;
+using BIT.Xpo.OfflineDataSync;
 
 namespace OfflineDataSyncDemo.Win {
     // For more typical usage scenarios, be sure to check out https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.Win.WinApplication._members
-    public partial class OfflineDataSyncDemoWindowsFormsApplication : WinApplication {
+    public partial class OfflineDataSyncDemoWindowsFormsApplication : WinApplication, ISyncDataStore
+    {
+        public SyncDataStore SyncDataStore { get; set; }
         #region Default XAF configuration options (https://www.devexpress.com/kb=T501418)
         static OfflineDataSyncDemoWindowsFormsApplication() {
             DevExpress.Persistent.Base.PasswordCryptographer.EnableRfc2898 = true;
