@@ -19,7 +19,9 @@ namespace OfflineDataSyncDemo.Module
         {
             SyncDataStore.EnableTransactionHistory=true;
             _Assemblies = Assemblies;
-            DataStore = new SyncDataStore(ConfigurationManager.AppSettings["Main"]);
+
+            //TryToPushOnEveryCommit
+            DataStore = new SyncDataStore(ConfigurationManager.AppSettings["Identity"],bool.Parse(ConfigurationManager.AppSettings["TryToPushOnEveryCommit"]), ConfigurationManager.AppSettings["SyncServerUrl"]);
         }
         public DevExpress.Xpo.DB.IDataStore CreateUpdatingStore(bool allowUpdateSchema, out IDisposable[] disposableObjects)
         {
