@@ -4,15 +4,20 @@ using System.ComponentModel;
 using DevExpress.ExpressApp.Web;
 using System.Collections.Generic;
 using DevExpress.ExpressApp.Xpo;
+using OfflineDataSyncDemo.Module;
+using BIT.Xpo.OfflineDataSync;
 
 namespace OfflineDataSyncDemo.Web {
     // For more typical usage scenarios, be sure to check out https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.Web.WebApplication
-    public partial class OfflineDataSyncDemoAspNetApplication : WebApplication {
+    public partial class OfflineDataSyncDemoAspNetApplication : WebApplication, ISyncDataStore
+    {
         private DevExpress.ExpressApp.SystemModule.SystemModule module1;
         private DevExpress.ExpressApp.Web.SystemModule.SystemAspNetModule module2;
         private OfflineDataSyncDemo.Module.OfflineDataSyncDemoModule module3;
         private OfflineDataSyncDemo.Module.Web.OfflineDataSyncDemoAspNetModule module4;
         private DevExpress.ExpressApp.Objects.BusinessClassLibraryCustomizationModule objectsModule;
+
+        public SyncDataStore SyncDataStore { get; set; }
 
         #region Default XAF configuration options (https://www.devexpress.com/kb=T501418)
         static OfflineDataSyncDemoAspNetApplication() {

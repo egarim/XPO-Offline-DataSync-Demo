@@ -17,6 +17,18 @@ namespace BIT.Xpo.Sync.Server.Controllers
         {
 
         }
+        public override IActionResult GetAllByIdentity(string Identity, int FromTransactionId)
+        {
+            return base.GetAllByIdentity(Identity, FromTransactionId);
+        }
+        public override Task<IActionResult> Post()
+        {
+            return base.Post();
+        }
+        public override IActionResult GetTransactionLogCountByIdentity(string Identity)
+        {
+            return base.GetTransactionLogCountByIdentity(Identity);
+        }
 
     }
 }

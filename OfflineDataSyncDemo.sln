@@ -19,11 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MasterServer", "MasterServe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BIT.Xpo.Sync.Server", "BIT.Xpo.Sync.Server\BIT.Xpo.Sync.Server.csproj", "{4F7E2355-AE8B-424D-A662-564FE32A2E0A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7EE10467-3CD8-4CA6-9865-B84D1B8D6D57}"
-	ProjectSection(SolutionItems) = preProject
-		README.MD = README.MD
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

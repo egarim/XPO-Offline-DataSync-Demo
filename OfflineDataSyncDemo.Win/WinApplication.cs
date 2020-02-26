@@ -8,6 +8,7 @@ using DevExpress.ExpressApp.Win.Utils;
 using DevExpress.ExpressApp.Xpo;
 using OfflineDataSyncDemo.Module;
 using BIT.Xpo.OfflineDataSync;
+using System.Configuration;
 
 namespace OfflineDataSyncDemo.Win {
     // For more typical usage scenarios, be sure to check out https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.Win.WinApplication._members
@@ -47,7 +48,16 @@ namespace OfflineDataSyncDemo.Win {
             e.Updater.Update();
             e.Handled = true;
 #else
-            if(System.Diagnostics.Debugger.IsAttached) {
+
+
+            if(bool.Parse(ConfigurationManager.AppSettings["TryToPushOnEveryCommit"]))
+            {
+                e.Updater.Update();
+                e.Handled = true;
+                return;
+            }
+
+            if (System.Diagnostics.Debugger.IsAttached) {
                 e.Updater.Update();
                 e.Handled = true;
             }
